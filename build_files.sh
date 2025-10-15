@@ -1,23 +1,21 @@
 #!/bin/bash
-set -e  # Stop on any error
+set -e
 
-echo "=== Starting build_files.sh ==="
-
-# Install dependencies
 echo "Installing Python dependencies..."
+pip install --upgrade pip
 pip install -r requirements.txt
 
-# Run collectstatic
+echo "Django version:"
+python -m django --version
+
 echo "Collecting static files..."
 python manage.py collectstatic --noinput
 
-# Check if the folder exists
+echo "Checking staticfiles_build folder..."
 if [ -d "staticfiles_build" ]; then
-  echo "✅ staticfiles_build folder created successfully!"
+  echo "✅ Folder exists!"
   ls -la staticfiles_build
 else
-  echo "❌ ERROR: staticfiles_build folder not found!"
+  echo "❌ Folder not found!"
   exit 1
 fi
-
-echo "=== Finished build_files.sh ==="
