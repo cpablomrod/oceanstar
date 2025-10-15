@@ -1,0 +1,374 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'en' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "I Want to Travel" %} - Oceanstar Travel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        
+        .page-container {
+            min-height: 100vh;
+            background-image: url('/static/images/airport-3364232.JPG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .page-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+        
+        .page-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            z-index: 10;
+        }
+        
+        .header-logo {
+            width: 180px;
+            height: auto;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
+            transition: transform 0.3s ease;
+        }
+        
+        .header-logo:hover {
+            transform: scale(1.1);
+        }
+        
+        .home-link {
+            background: rgba(37, 99, 235, 0.9);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .home-link:hover {
+            background: rgba(37, 99, 235, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .form-card {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 50px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .form-title {
+            color: white;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        
+        .form-group {
+            margin-bottom: 30px;
+        }
+        
+        .form-label {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+        
+        .form-label i {
+            margin-right: 12px;
+            font-size: 1.3rem;
+            width: 25px;
+            text-align: center;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: white;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        }
+        
+        textarea.form-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 30px;
+            margin-top: 15px;
+        }
+        
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .radio-item input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #2563eb;
+        }
+        
+        .radio-item label {
+            color: white;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+        
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+        
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.4);
+        }
+        
+        .contact-text {
+            text-align: center;
+            color: white;
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-top: 25px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+        
+        .success-message {
+            background: rgba(34, 197, 94, 0.9);
+            color: white;
+            padding: 60px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .success-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        
+        .success-text {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .home-button {
+            background: white;
+            color: #22c55e;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+        
+        .home-button:hover {
+            background: #f9fafb;
+            transform: translateY(-2px);
+            color: #22c55e;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .form-card {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            .form-title {
+                font-size: 2rem;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .page-header {
+                padding: 15px 20px;
+            }
+            
+            .header-logo {
+                width: 140px;
+            }
+            
+            .home-link {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <!-- Header with Logo, Language Switcher and Home Button -->
+        <div class="page-header">
+            <img src="/static/images/oceanstar_logo.png" alt="Oceanstar Travel" class="header-logo">
+            <a href="{% url 'travel:home' %}" class="home-link">
+                <i class="fas fa-home"></i> {% trans "Back to Home" %}
+            </a>
+        </div>
+        
+        {% if form_submitted %}
+            <div class="success-message">
+                <h2 class="success-title"><i class="fas fa-plane"></i> {% trans "Thank you!" %}</h2>
+                <p class="success-text">{% trans "Your adventure is in progress" %}</p>
+                <a href="{% url 'travel:home' %}" class="home-button">
+                    <i class="fas fa-home"></i> {% trans "Back to Home" %}
+                </a>
+            </div>
+        {% else %}
+            <form class="form-card" method="post">
+                {% csrf_token %}
+                <h1 class="form-title">{% trans "Plan Your Dream Trip" %}</h1>
+
+                <div class="form-group">
+                    <label class="form-label" for="people_count">
+                        <i class="fas fa-users"></i>
+                        {% trans "How many people are travelling?" %}
+                    </label>
+                    <select class="form-input" id="people_count" name="people_count" required>
+                        <option value="">{% trans "Select number of travelers" %}</option>
+                        <option value="1">{% trans "1 person" %}</option>
+                        <option value="2">{% trans "2 people" %}</option>
+                        <option value="3">{% trans "3 people" %}</option>
+                        <option value="4">{% trans "4 people" %}</option>
+                        <option value="5">{% trans "5 people" %}</option>
+                        <option value="6+">{% trans "6 or more people" %}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-child"></i>
+                        {% trans "Any kids?" %}
+                    </label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="kids_yes" name="has_kids" value="yes" required>
+                            <label for="kids_yes">{% trans "Yes" %}</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="kids_no" name="has_kids" value="no" required>
+                            <label for="kids_no">{% trans "No" %}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="travel_dates">
+                        <i class="fas fa-calendar-alt"></i>
+                        {% trans "When do you want to travel?" %}
+                    </label>
+                    <input type="text" class="form-input" id="travel_dates" name="travel_dates" 
+                           placeholder="{% trans 'e.g., December 2024, Summer 2025, Flexible dates' %}" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="destination">
+                        <i class="fas fa-map-marker-alt"></i>
+                        {% trans "Where do you want to go?" %}
+                    </label>
+                    <input type="text" class="form-input" id="destination" name="destination" 
+                           placeholder="{% trans 'e.g., Europe, Asia, Beach destination, Adventure trip' %}" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="requirements">
+                        <i class="fas fa-lightbulb"></i>
+                        {% trans "Tell us what you are looking for" %}
+                    </label>
+                    <textarea class="form-input" id="requirements" name="requirements" 
+                              placeholder="{% trans 'Describe your dream vacation... What activities do you enjoy? What type of accommodation do you prefer? Any special requirements or interests?' %}" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-button">
+                    <i class="fas fa-paper-plane"></i> {% trans "Send My Travel Request" %}
+                </button>
+                
+                <p class="contact-text">
+                    {% trans "We will get in contact with you soon!" %}
+                </p>
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>

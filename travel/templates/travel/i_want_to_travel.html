@@ -1,0 +1,334 @@
+{% extends 'travel/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "I Want to Travel" %} - Oceanstar Travel{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+    /* Cache buster: v7 */
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .travel-form-page {
+        min-height: 100vh;
+        background-image: url('/static/images/airport-3364232.JPG');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    
+    .travel-form-page::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+    
+    .travel-form {
+        background: rgba(0, 0, 0, 0.8);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        max-width: 600px;
+        width: 100%;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        position: relative;
+        z-index: 10;
+    }
+
+    .form-title {
+        text-align: center;
+        color: white;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 25px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-group label {
+        display: flex;
+        align-items: center;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: white;
+        margin-bottom: 10px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    .form-group i {
+        margin-right: 10px;
+        font-size: 1.2rem;
+        width: 20px;
+        text-align: center;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: white;
+        color: #333;
+        box-sizing: border-box;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .radio-group {
+        display: flex;
+        gap: 20px;
+        margin-top: 10px;
+    }
+
+    .radio-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .radio-option input[type="radio"] {
+        width: 18px;
+        height: 18px;
+        accent-color: #2563eb;
+    }
+
+    .radio-option label {
+        margin: 0;
+        font-weight: 500;
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    }
+
+    textarea.form-control {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .submit-btn {
+        width: 100%;
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: white;
+        padding: 15px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+    }
+    
+    .contact-message {
+        text-align: center;
+        color: white;
+        font-size: 1rem;
+        font-weight: 500;
+        margin-top: 15px;
+        margin-bottom: 0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        font-style: italic;
+    }
+
+    .thank-you-message {
+        background: rgba(34, 197, 94, 0.95);
+        color: white;
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+        width: 100%;
+        backdrop-filter: blur(10px);
+        position: relative;
+        z-index: 10;
+    }
+
+    .thank-you-message h2 {
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    .thank-you-message p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+
+    .back-home-btn {
+        background: white;
+        color: #22c55e;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 25px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+
+    .back-home-btn:hover {
+        background: #f9fafb;
+        transform: translateY(-2px);
+        color: #22c55e;
+        text-decoration: none;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .form-title {
+            font-size: 2rem;
+        }
+        
+        .travel-form {
+            padding: 30px 20px;
+            margin: 20px;
+        }
+        
+        .header-nav {
+            padding: 0 15px;
+        }
+        
+        .logo-top-left {
+            width: 40px;
+        }
+        
+        .home-link {
+            padding: 10px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .radio-group {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="travel-form-page">
+    {% if form_submitted %}
+        <!-- Thank You Message -->
+        <div class="thank-you-message">
+            <h2><i class="fas fa-check-circle"></i> {% trans "Thank You!" %}</h2>
+            <p>{% trans "We will get in touch with you soon!" %}</p>
+            <a href="{% url 'travel:home' %}" class="back-home-btn">
+                <i class="fas fa-home"></i> {% trans "Back to Home" %}
+            </a>
+        </div>
+    {% else %}
+        <!-- Travel Form -->
+        <form class="travel-form" method="post">
+                {% csrf_token %}
+                <h1 class="form-title">{% trans "Plan Your Dream Trip" %}</h1>
+
+                <!-- Number of People -->
+                <div class="form-group">
+                    <label for="people_count">
+                        <i class="fas fa-users"></i>
+                        {% trans "How many people are travelling?" %}
+                    </label>
+                    <select class="form-control" id="people_count" name="people_count" required>
+                        <option value="">{% trans "Select number of travelers" %}</option>
+                        <option value="1">{% trans "1 person" %}</option>
+                        <option value="2">{% trans "2 people" %}</option>
+                        <option value="3">{% trans "3 people" %}</option>
+                        <option value="4">{% trans "4 people" %}</option>
+                        <option value="5">{% trans "5 people" %}</option>
+                        <option value="6+">{% trans "6 or more people" %}</option>
+                    </select>
+                </div>
+
+                <!-- Kids -->
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-child"></i>
+                        {% trans "Any kids?" %}
+                    </label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="kids_yes" name="has_kids" value="yes" required>
+                            <label for="kids_yes">{% trans "Yes" %}</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="kids_no" name="has_kids" value="no" required>
+                            <label for="kids_no">{% trans "No" %}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Travel Dates -->
+                <div class="form-group">
+                    <label for="travel_dates">
+                        <i class="fas fa-calendar-alt"></i>
+                        {% trans "When do you want to travel?" %}
+                    </label>
+                    <input type="text" class="form-control" id="travel_dates" name="travel_dates" 
+                           placeholder="{% trans 'e.g., December 2024, Summer 2025, Flexible dates' %}" required>
+                </div>
+
+                <!-- Destination -->
+                <div class="form-group">
+                    <label for="destination">
+                        <i class="fas fa-map-marker-alt"></i>
+                        {% trans "Where do you want to go?" %}
+                    </label>
+                    <input type="text" class="form-control" id="destination" name="destination" 
+                           placeholder="{% trans 'e.g., Europe, Asia, Beach destination, Adventure trip' %}" required>
+                </div>
+
+                <!-- Requirements -->
+                <div class="form-group">
+                    <label for="requirements">
+                        <i class="fas fa-lightbulb"></i>
+                        {% trans "Tell us what you are looking for" %}
+                    </label>
+                    <textarea class="form-control" id="requirements" name="requirements" 
+                              placeholder="{% trans 'Describe your dream vacation... What activities do you enjoy? What type of accommodation do you prefer? Any special requirements or interests?' %}" required></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> {% trans "Send My Travel Request" %}
+                </button>
+                
+                <!-- Contact Message -->
+                <p class="contact-message">
+                    {% trans "We will get in contact with you soon!" %}
+                </p>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}

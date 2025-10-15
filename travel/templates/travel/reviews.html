@@ -1,0 +1,205 @@
+{% extends 'travel/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Customer Reviews" %} - Oceanstar Travel{% endblock %}
+
+{% block content %}
+<section class="page-header py-5 bg-warning text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4 fw-bold">{% trans "Customer Reviews" %}</h1>
+                <p class="lead">{% trans "What our travelers are saying about their experiences" %}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reviews-stats py-4 bg-light">
+    <div class="container">
+        <div class="row text-center">
+            {% if avg_rating %}
+            <div class="col-md-4">
+                <div class="stat-item">
+                    <h3 class="text-warning mb-2">
+                        <i class="fas fa-star"></i> {{ avg_rating|floatformat:1 }}/5
+                    </h3>
+                    <p class="text-muted">{% trans "Average Rating" %}</p>
+                </div>
+            </div>
+            {% endif %}
+            <div class="col-md-4">
+                <div class="stat-item">
+                    <h3 class="text-primary mb-2">{{ reviews.paginator.count }}+</h3>
+                    <p class="text-muted">{% trans "Total Reviews" %}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-item">
+                    <h3 class="text-success mb-2">98%</h3>
+                    <p class="text-muted">{% trans "Satisfied Customers" %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reviews-content py-5">
+    <div class="container">
+        <!-- Filter Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="filter-section bg-light p-4 rounded">
+                    <form method="GET" class="row g-3 align-items-end">
+                        <div class="col-md-4">
+                            <label for="rating" class="form-label">{% trans "Filter by Rating" %}</label>
+                            <select name="rating" id="rating" class="form-select">
+                                <option value="">{% trans "All Ratings" %}</option>
+                                {% for value, display in rating_choices %}
+                                    <option value="{{ value }}" {% if selected_rating == value|stringformat:'s' %}selected{% endif %}>
+                                        {{ display }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-filter me-2"></i>{% trans "Filter Reviews" %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {% if reviews %}
+            <div class="row">
+                {% for review in reviews %}
+                <div class="col-12 mb-4">
+                    <div class="review-card border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="review-header mb-3">
+                                        <div class="review-stars mb-2">
+                                            {% for i in "12345" %}
+                                                {% if forloop.counter <= review.rating %}
+                                                    <i class="fas fa-star text-warning"></i>
+                                                {% else %}
+                                                    <i class="far fa-star text-warning"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <span class="ms-2 text-muted">{{ review.rating }}/5 stars</span>
+                                        </div>
+                                        <h4 class="card-title mb-2">{{ review.title }}</h4>
+                                        <p class="card-text">{{ review.content }}</p>
+                                    </div>
+                                    
+                                    <div class="review-package-info bg-light p-3 rounded">
+                                        <h6 class="text-muted mb-2">
+                                            <i class="fas fa-suitcase me-2"></i>Package Reviewed:
+                                        </h6>
+                                        <p class="mb-1">
+                                            <strong>{{ review.package.title }}</strong>
+                                        </p>
+                                        <p class="text-muted small mb-0">
+                                            <i class="fas fa-map-marker-alt me-1"></i>{{ review.package.destination }} •
+                                            <i class="fas fa-tag me-1"></i>{{ review.package.get_package_type_display }}
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <div class="review-author text-center">
+                                        <div class="author-avatar mb-3">
+                                            <i class="fas fa-user-circle fa-4x text-warning"></i>
+                                        </div>
+                                        <h5>{{ review.user.first_name|default:review.user.username }}</h5>
+                                        <p class="text-muted small mb-2">Verified Traveler</p>
+                                        <p class="text-muted small">
+                                            <i class="fas fa-calendar me-1"></i>{{ review.created_at|date:"F j, Y" }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if reviews.has_other_pages %}
+            <nav aria-label="Page navigation" class="mt-5">
+                <ul class="pagination justify-content-center">
+                    {% if reviews.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ reviews.previous_page_number }}{% if selected_rating %}&rating={{ selected_rating }}{% endif %}">
+                                <i class="fas fa-chevron-left"></i> Previous
+                            </a>
+                        </li>
+                    {% endif %}
+                    
+                    {% for num in reviews.paginator.page_range %}
+                        {% if reviews.number == num %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ num }}</span>
+                            </li>
+                        {% elif num > reviews.number|add:'-3' and num < reviews.number|add:'3' %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}{% if selected_rating %}&rating={{ selected_rating }}{% endif %}">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if reviews.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ reviews.next_page_number }}{% if selected_rating %}&rating={{ selected_rating }}{% endif %}">
+                                Next <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+
+        {% else %}
+            <div class="row">
+                <div class="col-12 text-center py-5">
+                    {% if selected_rating %}
+                        <i class="fas fa-search fa-4x text-muted mb-4"></i>
+                        <h3>No reviews found</h3>
+                        <p class="text-muted">No reviews match your selected rating filter.</p>
+                        <a href="{% url 'travel:reviews' %}" class="btn btn-warning">
+                            <i class="fas fa-star me-2"></i>View All Reviews
+                        </a>
+                    {% else %}
+                        <i class="fas fa-comments fa-4x text-muted mb-4"></i>
+                        <h3>No reviews yet</h3>
+                        <p class="text-muted">Be the first to share your travel experience!</p>
+                        <a href="{% url 'travel:i_want_to_travel' %}" class="btn btn-warning">
+                            <i class="fas fa-plane-departure me-2"></i>Book Your Trip
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="review-cta py-5 bg-dark text-white">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2 class="mb-4">Have You Traveled With Us?</h2>
+                <p class="lead mb-4">Share your experience and help other travelers make their decision.</p>
+                <a href="#" class="btn btn-warning btn-lg">
+                    <i class="fas fa-pen me-2"></i>Write a Review
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,330 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-14 14:42+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
+"1 : 2;\n"
+
+#: travel/templates/travel/base.html:69
+msgid "Home"
+msgstr "Inicio"
+
+#: travel/templates/travel/base.html:93
+msgid "Quick Links"
+msgstr "Enlaces Rápidos"
+
+#: travel/templates/travel/base.html:95 travel/templates/travel/home.html:16
+#: travel/templates/travel/home.html:18
+#: travel/templates/travel/latest_offers_new.html:8
+msgid "Latest Offers"
+msgstr "Últimas Ofertas"
+
+#: travel/templates/travel/base.html:96
+msgid "Plan Your Trip"
+msgstr "Planifica tu Viaje"
+
+#: travel/templates/travel/base.html:97 travel/templates/travel/reviews.html:5
+#: travel/templates/travel/reviews.html:12
+#: travel/templates/travel/reviews_new.html:7
+msgid "Customer Reviews"
+msgstr "Reseñas de Clientes"
+
+#: travel/templates/travel/base.html:101
+msgid "Contact Us"
+msgstr "Contáctanos"
+
+#: travel/templates/travel/base.html:113
+msgid "All rights reserved."
+msgstr "Todos los derechos reservados."
+
+#: travel/templates/travel/feedback_form.html:8
+#: travel/templates/travel/home.html:31 travel/templates/travel/home.html:33
+msgid "I Just Came Back"
+msgstr "Acabo de Regresar"
+
+#: travel/templates/travel/feedback_form.html:315
+#: travel/templates/travel/feedback_form.html:325
+#: travel/templates/travel/i_want_to_travel.html:248
+#: travel/templates/travel/latest_offers_new.html:510
+#: travel/templates/travel/reviews_new.html:303
+#: travel/templates/travel/travel_form_new.html:347
+#: travel/templates/travel/travel_form_new.html:357
+msgid "Back to Home"
+msgstr "Volver al Inicio"
+
+#: travel/templates/travel/feedback_form.html:322
+msgid "Thank you for choosing us"
+msgstr "Gracias por elegirnos"
+
+#: travel/templates/travel/feedback_form.html:323
+msgid "Your feedback helps us improve our service!"
+msgstr "¡Tu opinión nos ayuda a mejorar nuestro servicio!"
+
+#: travel/templates/travel/feedback_form.html:331
+msgid "Tell us a bit about your experience"
+msgstr "Cuéntanos un poco sobre tu experiencia"
+
+#: travel/templates/travel/feedback_form.html:336
+msgid "How was your travel experience?"
+msgstr "¿Cómo fue tu experiencia de viaje?"
+
+#: travel/templates/travel/feedback_form.html:339
+msgid ""
+"Share your travel experience with us... What did you enjoy the most? How was "
+"the service? Any memorable moments?"
+msgstr ""
+"Comparte tu experiencia de viaje con nosotros... ¿Qué disfrutaste más? ¿Cómo "
+"fue el servicio? ¿Algún momento memorable?"
+
+#: travel/templates/travel/feedback_form.html:342
+#: travel/templates/travel/feedback_form.html:355
+msgid "characters"
+msgstr "caracteres"
+
+#: travel/templates/travel/feedback_form.html:349
+msgid "What could we do to improve?"
+msgstr "¿Qué podríamos hacer para mejorar?"
+
+#: travel/templates/travel/feedback_form.html:352
+msgid ""
+"Your suggestions help us provide better service... What could we have done "
+"differently? Any improvements you\\"
+msgstr ""
+"Tus sugerencias nos ayudan a brindar un mejor servicio... ¿Qué podríamos "
+"haber hecho diferente? ¿Alguna mejora que te gustaría ver?"
+
+#: travel/templates/travel/feedback_form.html:360
+msgid "Send Feedback"
+msgstr "Enviar Comentarios"
+
+#: travel/templates/travel/home.html:5
+msgid "Your Dream Journey Awaits"
+msgstr "Tu Viaje de Ensueño te Espera"
+
+#: travel/templates/travel/home.html:24 travel/templates/travel/home.html:26
+#: travel/templates/travel/i_want_to_travel.html:5
+#: travel/templates/travel/travel_form_new.html:7
+msgid "I Want to Travel"
+msgstr "Quiero Viajar"
+
+#: travel/templates/travel/home.html:44 travel/templates/travel/home.html:46
+msgid "Reviews"
+msgstr "Reseñas"
+
+#: travel/templates/travel/home.html:52 travel/templates/travel/home.html:54
+msgid "Join our WhatsApp Group"
+msgstr "Únete a nuestro Grupo de WhatsApp"
+
+#: travel/templates/travel/home.html:64
+msgid "We're working on it!"
+msgstr "¡Estamos trabajando en ello!"
+
+#: travel/templates/travel/home.html:65
+msgid ""
+"Our WhatsApp integration is coming soon. In the meantime, you can contact us "
+"at:"
+msgstr ""
+"Nuestra integración de WhatsApp llegará pronto. Mientras tanto, puedes "
+"contactarnos en:"
+
+#: travel/templates/travel/i_want_to_travel.html:245
+msgid "Thank You!"
+msgstr "¡Gracias!"
+
+#: travel/templates/travel/i_want_to_travel.html:246
+msgid "We will get in touch with you soon!"
+msgstr "¡Nos pondremos en contacto contigo pronto!"
+
+#: travel/templates/travel/i_want_to_travel.html:255
+#: travel/templates/travel/travel_form_new.html:363
+msgid "Plan Your Dream Trip"
+msgstr "Planifica tu Viaje de Ensueño"
+
+#: travel/templates/travel/i_want_to_travel.html:261
+#: travel/templates/travel/travel_form_new.html:368
+msgid "How many people are travelling?"
+msgstr "¿Cuántas personas van a viajar?"
+
+#: travel/templates/travel/i_want_to_travel.html:264
+#: travel/templates/travel/travel_form_new.html:371
+msgid "Select number of travelers"
+msgstr "Selecciona número de viajeros"
+
+#: travel/templates/travel/i_want_to_travel.html:265
+#: travel/templates/travel/travel_form_new.html:372
+msgid "1 person"
+msgstr "1 persona"
+
+#: travel/templates/travel/i_want_to_travel.html:266
+#: travel/templates/travel/travel_form_new.html:373
+msgid "2 people"
+msgstr "2 personas"
+
+#: travel/templates/travel/i_want_to_travel.html:267
+#: travel/templates/travel/travel_form_new.html:374
+msgid "3 people"
+msgstr "3 personas"
+
+#: travel/templates/travel/i_want_to_travel.html:268
+#: travel/templates/travel/travel_form_new.html:375
+msgid "4 people"
+msgstr "4 personas"
+
+#: travel/templates/travel/i_want_to_travel.html:269
+#: travel/templates/travel/travel_form_new.html:376
+msgid "5 people"
+msgstr "5 personas"
+
+#: travel/templates/travel/i_want_to_travel.html:270
+#: travel/templates/travel/travel_form_new.html:377
+msgid "6 or more people"
+msgstr "6 o más personas"
+
+#: travel/templates/travel/i_want_to_travel.html:278
+#: travel/templates/travel/travel_form_new.html:384
+msgid "Any kids?"
+msgstr "¿Algún niño?"
+
+#: travel/templates/travel/i_want_to_travel.html:283
+#: travel/templates/travel/travel_form_new.html:389
+msgid "Yes"
+msgstr "Sí"
+
+#: travel/templates/travel/i_want_to_travel.html:287
+#: travel/templates/travel/travel_form_new.html:393
+msgid "No"
+msgstr "No"
+
+#: travel/templates/travel/i_want_to_travel.html:296
+#: travel/templates/travel/travel_form_new.html:401
+msgid "When do you want to travel?"
+msgstr "¿Cuándo quieres viajar?"
+
+#: travel/templates/travel/i_want_to_travel.html:299
+#: travel/templates/travel/travel_form_new.html:404
+msgid "e.g., December 2024, Summer 2025, Flexible dates"
+msgstr "ej., Diciembre 2024, Verano 2025, Fechas flexibles"
+
+#: travel/templates/travel/i_want_to_travel.html:306
+#: travel/templates/travel/travel_form_new.html:410
+msgid "Where do you want to go?"
+msgstr "¿A dónde quieres ir?"
+
+#: travel/templates/travel/i_want_to_travel.html:309
+#: travel/templates/travel/travel_form_new.html:413
+msgid "e.g., Europe, Asia, Beach destination, Adventure trip"
+msgstr "ej., Europa, Asia, Destino de playa, Viaje de aventura"
+
+#: travel/templates/travel/i_want_to_travel.html:316
+#: travel/templates/travel/travel_form_new.html:419
+msgid "Tell us what you are looking for"
+msgstr "Cuéntanos qué estás buscando"
+
+#: travel/templates/travel/i_want_to_travel.html:319
+#: travel/templates/travel/travel_form_new.html:422
+msgid ""
+"Describe your dream vacation... What activities do you enjoy? What type of "
+"accommodation do you prefer? Any special requirements or interests?"
+msgstr ""
+"Describe tus vacaciones de ensueño... ¿Qué actividades disfrutas? ¿Qué tipo "
+"de alojamiento prefieres? ¿Algún requisito especial o interés?"
+
+#: travel/templates/travel/i_want_to_travel.html:324
+#: travel/templates/travel/travel_form_new.html:426
+msgid "Send My Travel Request"
+msgstr "Enviar Mi Solicitud de Viaje"
+
+#: travel/templates/travel/i_want_to_travel.html:329
+#: travel/templates/travel/travel_form_new.html:430
+msgid "We will get in contact with you soon!"
+msgstr "¡Nos pondremos en contacto contigo pronto!"
+
+#: travel/templates/travel/latest_offers_new.html:515
+msgid "Here are the best offers at the moment"
+msgstr "Aquí están las mejores ofertas del momento"
+
+#: travel/templates/travel/latest_offers_new.html:539
+#, fuzzy
+#| msgid "Latest Offers"
+msgid "Back to Offers"
+msgstr "Volver a Ofertas"
+
+#: travel/templates/travel/latest_offers_new.html:548
+msgid "I want more information"
+msgstr "Quiero más información"
+
+#: travel/templates/travel/reviews.html:13
+msgid "What our travelers are saying about their experiences"
+msgstr "Lo que nuestros viajeros dicen sobre sus experiencias"
+
+#: travel/templates/travel/reviews.html:28
+msgid "Average Rating"
+msgstr "Calificación Promedio"
+
+#: travel/templates/travel/reviews.html:35
+#, fuzzy
+#| msgid "Reviews"
+msgid "Total Reviews"
+msgstr "Total de Reseñas"
+
+#: travel/templates/travel/reviews.html:41
+msgid "Satisfied Customers"
+msgstr "Clientes Satisfechos"
+
+#: travel/templates/travel/reviews.html:56
+msgid "Filter by Rating"
+msgstr "Filtrar por Calificación"
+
+#: travel/templates/travel/reviews.html:58
+msgid "All Ratings"
+msgstr "Todas las Calificaciones"
+
+#: travel/templates/travel/reviews.html:68
+#, fuzzy
+#| msgid "Customer Reviews"
+msgid "Filter Reviews"
+msgstr "Filtrar Reseñas"
+
+#: travel/templates/travel/reviews_new.html:309
+msgid "What our customers think"
+msgstr "Lo que piensan nuestros clientes"
+
+#: travel/templates/travel/reviews_new.html:311
+msgid "Discover the amazing experiences our travelers have shared with us"
+msgstr "Descubre las increíbles experiencias que nuestros viajeros han compartido con nosotros"
+
+#: travel/templates/travel/reviews_new.html:321
+msgid "Customer reviews will appear here soon!"
+msgstr "¡Las reseñas de clientes aparecerán aquí pronto!"
+
+#: travel/templates/travel/reviews_new.html:324
+msgid ""
+"Our admin team is working on displaying the wonderful feedback from our "
+"travelers."
+msgstr ""
+"Nuestro equipo administrativo está trabajando en mostrar los maravillosos "
+"comentarios de nuestros viajeros."
+
+#: travel/templates/travel/travel_form_new.html:354
+#, fuzzy
+#| msgid "Thank You!"
+msgid "Thank you!"
+msgstr "¡Gracias!"
+
+#: travel/templates/travel/travel_form_new.html:355
+msgid "Your adventure is in progress"
+msgstr "Tu aventura está en progreso"

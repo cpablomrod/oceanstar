@@ -1,0 +1,158 @@
+{% extends 'travel/base.html' %}
+{% load static %}
+
+{% block title %}Travel Memories - Oceanstar Travel{% endblock %}
+
+{% block content %}
+<section class="page-header py-5 bg-info text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4 fw-bold">I Already Travelled</h1>
+                <p class="lead">Cherished memories from our amazing travelers</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="experiences-content py-5">
+    <div class="container">
+        {% if experiences %}
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <h2>Travel Memories & Stories</h2>
+                    <p class="text-muted">Real experiences shared by fellow adventurers</p>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for experience in experiences %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="experience-card h-100 shadow-sm">
+                        <div class="experience-image">
+                            {% if experience.images %}
+                                <img src="{{ experience.images.url }}" alt="Travel memory" class="card-img-top">
+                            {% else %}
+                                <div class="placeholder-image d-flex align-items-center justify-content-center bg-light">
+                                    <i class="fas fa-camera fa-3x text-muted"></i>
+                                </div>
+                            {% endif %}
+                            <div class="experience-date">
+                                <span class="date-tag">{{ experience.travel_date|date:"M Y" }}</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ experience.package.title }}</h5>
+                            <p class="card-text text-muted mb-2">
+                                <i class="fas fa-map-marker-alt me-2"></i>{{ experience.package.destination }}
+                            </p>
+                            <div class="traveler-info mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-user-circle fa-2x text-info me-3"></i>
+                                    <div>
+                                        <strong>{{ experience.user.first_name|default:experience.user.username }}</strong>
+                                        <div class="text-muted small">Traveled on {{ experience.travel_date }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if experience.story %}
+                                <p class="card-text">{{ experience.story|truncatewords:30 }}</p>
+                            {% else %}
+                                <p class="card-text text-muted fst-italic">A wonderful travel experience!</p>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info">{{ experience.package.get_package_type_display }}</span>
+                                <small class="text-muted">{{ experience.created_at|timesince }} ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if experiences.has_other_pages %}
+            <nav aria-label="Page navigation" class="mt-5">
+                <ul class="pagination justify-content-center">
+                    {% if experiences.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ experiences.previous_page_number }}">
+                                <i class="fas fa-chevron-left"></i> Previous
+                            </a>
+                        </li>
+                    {% endif %}
+                    
+                    {% for num in experiences.paginator.page_range %}
+                        {% if experiences.number == num %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ num }}</span>
+                            </li>
+                        {% elif num > experiences.number|add:'-3' and num < experiences.number|add:'3' %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if experiences.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ experiences.next_page_number }}">
+                                Next <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+
+        {% else %}
+            <div class="row">
+                <div class="col-12 text-center py-5">
+                    <i class="fas fa-camera fa-4x text-muted mb-4"></i>
+                    <h3>No Travel Memories Yet</h3>
+                    <p class="text-muted">Be the first to share your amazing travel experience with us!</p>
+                    <a href="{% url 'travel:i_want_to_travel' %}" class="btn btn-info">
+                        <i class="fas fa-plane-departure me-2"></i>Plan Your First Trip
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Inspiration Section -->
+<section class="inspiration-section py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2>Share Your Travel Story</h2>
+                <p class="text-muted">Have you traveled with us? We'd love to hear about your adventure!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-center mb-4">
+                <i class="fas fa-camera-retro fa-3x text-info mb-3"></i>
+                <h4>Share Photos</h4>
+                <p class="text-muted">Upload your favorite travel photos and inspire others.</p>
+            </div>
+            <div class="col-md-4 text-center mb-4">
+                <i class="fas fa-pen-fancy fa-3x text-info mb-3"></i>
+                <h4>Tell Your Story</h4>
+                <p class="text-muted">Share the highlights and memorable moments of your trip.</p>
+            </div>
+            <div class="col-md-4 text-center mb-4">
+                <i class="fas fa-heart fa-3x text-info mb-3"></i>
+                <h4>Inspire Others</h4>
+                <p class="text-muted">Help fellow travelers discover new destinations and experiences.</p>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="#" class="btn btn-info btn-lg">
+                <i class="fas fa-plus-circle me-2"></i>Share Your Experience
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

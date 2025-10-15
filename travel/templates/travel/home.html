@@ -1,0 +1,105 @@
+{% extends 'travel/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Oceanstar Travel - {% trans "Your Dream Journey Awaits" %}{% endblock %}
+
+{% block content %}
+<!-- Full Screen Navigation Layout -->
+<section class="home-fullscreen">
+    <div class="animated-overlay"></div>
+    <div class="home-navigation-container">
+        <!-- Semi-circle title removed temporarily for testing -->
+        
+        <!-- Top Navigation Link -->
+        <div class="nav-top">
+            <a href="{% url 'travel:latest_offers' %}" class="nav-link-icon" data-title="{% trans 'Latest Offers' %}">
+                <i class="fas fa-tags"></i>
+                <span class="nav-title">{% trans "Latest Offers" %}</span>
+            </a>
+        </div>
+        
+        <!-- Side Navigation Links -->
+        <div class="nav-left">
+            <a href="{% url 'travel:i_want_to_travel' %}" class="nav-link-icon" data-title="{% trans 'I Want to Travel' %}">
+                <i class="fas fa-plane-departure"></i>
+                <span class="nav-title">{% trans "I Want to Travel" %}</span>
+            </a>
+        </div>
+        
+        <div class="nav-right">
+            <a href="{% url 'travel:i_already_travelled' %}" class="nav-link-icon" data-title="{% trans 'I Just Came Back' %}">
+                <i class="fas fa-plane-arrival"></i>
+                <span class="nav-title">{% trans "I Just Came Back" %}</span>
+            </a>
+        </div>
+        
+        <!-- Center Logo -->
+        <div class="logo-center">
+            <img src="{% static 'images/oceanstar_logo.png' %}" alt="Oceanstar Travel" class="center-logo">
+        </div>
+        
+        <!-- Bottom Navigation Link -->
+        <div class="nav-bottom">
+            <a href="{% url 'travel:reviews' %}" class="nav-link-icon" data-title="{% trans 'Reviews' %}">
+                <i class="fas fa-star"></i>
+                <span class="nav-title">{% trans "Reviews" %}</span>
+            </a>
+        </div>
+        
+        <!-- WhatsApp Button -->
+        <div class="whatsapp-button">
+            <a href="#" onclick="showWhatsAppMessage()" class="whatsapp-link" data-title="{% trans 'Join our WhatsApp Group' %}">
+                <i class="fab fa-whatsapp"></i>
+                <span class="whatsapp-title">{% trans "Join our WhatsApp Group" %}</span>
+            </a>
+        </div>
+        
+        <!-- WhatsApp Popup Modal -->
+        <div id="whatsappModal" class="whatsapp-modal">
+            <div class="whatsapp-modal-content">
+                <span class="whatsapp-close" onclick="closeWhatsAppMessage()">&times;</span>
+                <div class="whatsapp-modal-body">
+                    <i class="fab fa-whatsapp whatsapp-icon"></i>
+                    <h3>{% trans "We're working on it!" %}</h3>
+                    <p>{% trans "Our WhatsApp integration is coming soon. In the meantime, you can contact us at:" %}</p>
+                    <p><strong>+34 615 285 552</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function showWhatsAppMessage() {
+        const modal = document.getElementById('whatsappModal');
+        modal.style.display = 'block';
+        
+        // Disable body scrolling when modal is open
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeWhatsAppMessage() {
+        const modal = document.getElementById('whatsappModal');
+        modal.style.display = 'none';
+        
+        // Re-enable body scrolling
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Close modal when clicking outside the content
+    window.onclick = function(event) {
+        const modal = document.getElementById('whatsappModal');
+        if (event.target === modal) {
+            closeWhatsAppMessage();
+        }
+    }
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeWhatsAppMessage();
+        }
+    });
+</script>
+{% endblock %}
